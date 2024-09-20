@@ -1,4 +1,4 @@
-package co.edu.uniquindio.parcial1.billetera_digital;
+package co.edu.uniquindio.billetera_digital;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;

@@ -1,4 +1,4 @@
-package co.edu.uniquindio.parcial1.billetera_digital.Model;
+package co.edu.uniquindio.billetera_digital.Model;
 
 public class Transaccion {
 

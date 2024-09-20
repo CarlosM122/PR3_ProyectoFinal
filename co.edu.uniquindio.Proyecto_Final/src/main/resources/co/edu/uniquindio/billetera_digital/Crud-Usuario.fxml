@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="588.0" prefWidth="910.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.billetera_digital.ViewController.Usuario_ViewController">
+    <children>
+        <TableView fx:id="TableViewUsuarios" layoutX="4.0" layoutY="230.0" prefHeight="355.0" prefWidth="902.0" style="-fx-background-color: lightgray; -fx-border-color: #3498db; -fx-border-width: 2px;">
+            <columns>
+                <TableColumn fx:id="tcNombre" prefWidth="190.39999103546143" text="Nombre" />
+                <TableColumn fx:id="tcCedula" prefWidth="140.80003356933594" text="Cedula" />
+            <TableColumn fx:id="tcTelefono" prefWidth="153.60003662109375" text="Telefono" />
+            <TableColumn fx:id="tcCorreo" prefWidth="251.20001220703125" text="Correo" />
+            <TableColumn fx:id="tcDirrecion" prefWidth="162.39990234375" text="Dirreción" />
+            </columns>
+        </TableView>
+        <Button fx:id="btnCrear" layoutX="637.0" layoutY="194.0" mnemonicParsing="false" onAction="#onCrear" style="-fx-background-color: #3498db; -fx-text-fill: white;" text="Crear" />
+        <Button fx:id="btnActualizar" layoutX="717.0" layoutY="194.0" mnemonicParsing="false" onAction="#onActualizar" style="-fx-background-color: #e67e22; -fx-text-fill: white;" text="Actualizar" />
+        <Button fx:id="btnEliminar" layoutX="815.0" layoutY="194.0" mnemonicParsing="false" onAction="#onEliminar" style="-fx-background-color: #e74c3c; -fx-text-fill: white;" text="Eliminar" />
+        <Label layoutX="230.0" layoutY="81.0" text="Nombre Completo:" />
+        <Label layoutX="230.0" layoutY="119.0" text="Cedula:" />
+        <Label layoutX="230.0" layoutY="159.0" text="Telefono:" />
+        <Label layoutX="572.0" layoutY="119.0" prefHeight="0.0" prefWidth="53.0" text="Dirección:" />
+        <Label layoutX="579.0" layoutY="81.0" text="Correo:" />
+        <TextField fx:id="txtNombre" layoutX="353.0" layoutY="77.0" />
+        <TextField fx:id="txtCedula" layoutX="354.0" layoutY="115.0" />
+        <TextField fx:id="txtTelefono" layoutX="355.0" layoutY="155.0" />
+        <TextField fx:id="txtCorreo" layoutX="648.0" layoutY="77.0" />
+        <TextField fx:id="txtDireccion" layoutX="648.0" layoutY="115.0" />
+        <Label layoutX="346.0" layoutY="14.0" text="Administracion De Usuarios" textFill="#4081dc">
+            <font>
+                <Font name="Bell MT" size="34.0" />
+            </font>
+        </Label>
+    </children>
+</AnchorPane>
