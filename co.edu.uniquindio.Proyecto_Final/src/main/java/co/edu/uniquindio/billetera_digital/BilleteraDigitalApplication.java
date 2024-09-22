@@ -12,7 +12,7 @@ public class BilleteraDigitalApplication extends Application {
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(BilleteraDigitalApplication.class.getResource("Crud-Usuario.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
-        stage.setTitle("Hello!");
+        stage.setTitle("Interfaz De Administracion");
         stage.setScene(scene);
         stage.show();
     }

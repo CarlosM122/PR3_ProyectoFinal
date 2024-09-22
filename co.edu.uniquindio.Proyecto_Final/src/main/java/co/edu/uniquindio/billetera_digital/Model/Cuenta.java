@@ -5,9 +5,12 @@ import lombok.Data;
 @Data
 public class Cuenta {
     private String nombreBanco;
-    private String numeroCuenta;
+    private int numeroCuenta;
     private String tipoCuenta;
-    private String idCuenta;
+    private final int idCuenta;
+    private static int contadorCuentas;
 
-
+    public Cuenta() {
+        idCuenta= ++contadorCuentas;
+    }
 }

@@ -5,5 +5,11 @@ import lombok.Data;
 @Data
 public class Categoria {
     private String nombre;
-    private String idCategoria;
+    private final int idCategoria;
+    private String descripcion;
+    private static int cantidadCategorias;
+
+    public Categoria() {
+        idCategoria = ++cantidadCategorias;
+    }
 }
