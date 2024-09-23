@@ -5,6 +5,7 @@ import java.util.List;
 
 public class BilleteraDigital {
 
+
     private List<Usuario> usuarios = new ArrayList<>();
 
     public List<Usuario> getUsuarios() {
@@ -36,5 +37,21 @@ public class BilleteraDigital {
             }
         }
         return usuarioEncontrado;
+    }
+
+    public boolean eliminarUsuario(String cedula) {
+        boolean eliminado = false;
+        for(Usuario usuario:usuarios){
+            if (usuario.getIdUsuario().equals(cedula)) {
+                usuarios.remove(usuario);
+                eliminado = true;
+                break;
+            }
+             else{
+                 eliminado=false;
+            }
+        }
+        return eliminado;
+
     }
 }

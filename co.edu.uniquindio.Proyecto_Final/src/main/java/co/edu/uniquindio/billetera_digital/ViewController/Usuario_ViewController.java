@@ -13,6 +13,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
 public class Usuario_ViewController {
+    Usuario usuarioSeleccionado;
     CrudUsuario_Controller crudUsuarioController;
     ObservableList<Usuario> usuariosList = FXCollections.observableArrayList();
 
@@ -76,8 +77,18 @@ public class Usuario_ViewController {
 
     @FXML
     void onEliminar(ActionEvent event) {
+        eliminarUsuario(txtCedula.getText());
 
     }
+
+    private void eliminarUsuario(String cedula) {
+        if (crudUsuarioController.eliminarUsuario(cedula)) {
+            mostrarMensaje("Información Usuario", "Usuario Eliminado", "El usuario se ha eliminado correctamente", Alert.AlertType.INFORMATION);
+        }else{
+            mostrarMensaje("Información Usuario", "Usuario NO Eliminado", "El usuario no se  ha eliminado", Alert.AlertType.ERROR);
+        }
+    }
+
 
     @FXML
     void initialize() {
@@ -89,6 +100,7 @@ public class Usuario_ViewController {
         initDataBinding();
         obtenerUsuarios();
         TableViewUsuarios.setItems(usuariosList);
+        listenerSelection();
     }
 
     private void obtenerUsuarios() {
@@ -155,6 +167,21 @@ public class Usuario_ViewController {
         alert.setHeaderText(header);
         alert.setContentText(contenido);
         alert.show();
+    }
+    private void listenerSelection() {
+        TableViewUsuarios.getSelectionModel().selectedItemProperty().addListener((obs,oldSelection,newSelection)->{
+            usuarioSeleccionado = newSelection;
+            mostrarInformacionUsuario(usuarioSeleccionado);
+        });
+    }
+    private void mostrarInformacionUsuario(Usuario usuario) {
+        if(usuarioSeleccionado!=null){
+            txtNombre.setText(usuarioSeleccionado.getNombre());
+            txtCorreo.setText(usuarioSeleccionado.getCorreo());
+            txtCedula.setText(usuarioSeleccionado.getIdUsuario());
+            txtDireccion.setText(usuarioSeleccionado.getDireccion());
+            txtTelefono.setText(String.valueOf(usuarioSeleccionado.getTelefono()));
+        }
     }
 
 }

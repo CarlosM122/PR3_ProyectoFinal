@@ -20,4 +20,8 @@ public class CrudUsuario_Controller {
     public boolean crearUsuario(Usuario usuario) {
         return modelFactory.crearUsuario(usuario);
     }
+
+    public boolean eliminarUsuario(String cedula) {
+        return modelFactory.eliminarUsuario(cedula);
+    }
 }

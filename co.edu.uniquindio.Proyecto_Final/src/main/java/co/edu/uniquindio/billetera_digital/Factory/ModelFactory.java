@@ -29,4 +29,8 @@ public class ModelFactory {
     public boolean crearUsuario(Usuario usuario) {
         return billeteraDigital.crearUsuario(usuario);
     }
+
+    public boolean eliminarUsuario(String cedula) {
+        return billeteraDigital.eliminarUsuario(cedula);
+    }
 }
