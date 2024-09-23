@@ -1,21 +1,65 @@
 package co.edu.uniquindio.billetera_digital.Model;
 
-import lombok.Data;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@Data
 public class Usuario {
     private String nombre;
     private String correo;
     private String telefono;
     private String direccion;
-    private final int idUsuario;
-    private static int cantidadUsuarios;
+    private String idUsuario;
     private List<Cuenta> cuentasAsociadas = new ArrayList<>();
 
     public Usuario() {
-        idUsuario = ++cantidadUsuarios;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getCorreo() {
+        return correo;
+    }
+
+    public void setCorreo(String correo) {
+        this.correo = correo;
+    }
+
+    public String getTelefono() {
+        return telefono;
+    }
+
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
+    }
+
+    public String getDireccion() {
+        return direccion;
+    }
+
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
+    }
+
+    public String getIdUsuario() {
+        return idUsuario;
+    }
+
+    public void setIdUsuario(String idUsuario) {
+        this.idUsuario = idUsuario;
+    }
+
+    public List<Cuenta> getCuentasAsociadas() {
+        return cuentasAsociadas;
+    }
+
+    public void setCuentasAsociadas(List<Cuenta> cuentasAsociadas) {
+        this.cuentasAsociadas = cuentasAsociadas;
     }
 }

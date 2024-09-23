@@ -5,6 +5,6 @@ public record UsuarioDto(
         String correo,
         String telefono,
         String direccion,
-        int idUsuario
+        String idUsuario
 ) {
 }

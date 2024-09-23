@@ -1,4 +1,4 @@
-package co.edu.uniquindio.billetera_digital.Mappings;
+package co.edu.uniquindio.billetera_digital.Mappings.Mapper;
 
 
 import co.edu.uniquindio.billetera_digital.Mappings.Dto.UsuarioDto;

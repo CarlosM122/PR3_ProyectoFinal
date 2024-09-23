@@ -18,7 +18,7 @@
                 <TableColumn fx:id="tcCedula" prefWidth="140.80003356933594" text="Cedula" />
             <TableColumn fx:id="tcTelefono" prefWidth="153.60003662109375" text="Telefono" />
             <TableColumn fx:id="tcCorreo" prefWidth="251.20001220703125" text="Correo" />
-            <TableColumn fx:id="tcDirrecion" prefWidth="162.39990234375" text="Dirreción" />
+            <TableColumn fx:id="tcDireccion" prefWidth="162.39990234375" text="Dirección" />
             </columns>
         </TableView>
         <Button fx:id="btnCrear" layoutX="637.0" layoutY="194.0" mnemonicParsing="false" onAction="#onCrear" style="-fx-background-color: #3498db; -fx-text-fill: white;" text="Crear" />

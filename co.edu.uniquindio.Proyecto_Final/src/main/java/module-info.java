@@ -11,4 +11,7 @@ module co.edu.uniquindio.billetera_digital {
     exports co.edu.uniquindio.billetera_digital.ViewController;
     opens co.edu.uniquindio.billetera_digital.Controller;
     exports co.edu.uniquindio.billetera_digital.Controller;
+    exports co.edu.uniquindio.billetera_digital.Mappings.Mapper;
+    exports co.edu.uniquindio.billetera_digital.Mappings.Dto;
+    exports co.edu.uniquindio.billetera_digital.Model;
 }
