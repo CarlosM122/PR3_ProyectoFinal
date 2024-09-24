@@ -67,7 +67,7 @@ public class Usuario_ViewController {
 
     @FXML
     void onActualizar(ActionEvent event) {
-
+        actualizarUsuario();
     }
 
     @FXML
@@ -82,10 +82,16 @@ public class Usuario_ViewController {
     }
 
     private void eliminarUsuario(String cedula) {
-        if (crudUsuarioController.eliminarUsuario(cedula)) {
-            mostrarMensaje("Información Usuario", "Usuario Eliminado", "El usuario se ha eliminado correctamente", Alert.AlertType.INFORMATION);
-        }else{
-            mostrarMensaje("Información Usuario", "Usuario NO Eliminado", "El usuario no se  ha eliminado", Alert.AlertType.ERROR);
+        if(usuarioSeleccionado!=null){
+            if (crudUsuarioController.eliminarUsuario(cedula)) {
+                usuariosList.remove(usuarioSeleccionado);
+                limpiarCamposUsuario();
+                mostrarMensaje("Información Usuario", "Usuario Eliminado", "El usuario se ha eliminado correctamente", Alert.AlertType.INFORMATION);
+            }else{
+                mostrarMensaje("Información Usuario", "Usuario No Eliminado", "El usuario no se  ha eliminado", Alert.AlertType.ERROR);
+            }
+        }else {
+            mostrarMensaje("Información Usuario", "Seleccione un usuario", "Porfavor seleccione un usuario para eliminar", Alert.AlertType.ERROR);
         }
     }
 
@@ -131,6 +137,32 @@ public class Usuario_ViewController {
             }
         } else {
             mostrarMensaje("Información Usuario", "Campos Vacíos", "Por favor complete todos los campos obligatorios", Alert.AlertType.ERROR);
+        }
+    }
+
+    private void actualizarUsuario() {
+        if (usuarioSeleccionado != null) {
+            if (validarFormulario()) {
+                if(txtCedula.getText().equals(usuarioSeleccionado.getIdUsuario())){
+                    Usuario usuario = construirDatosUsuario();
+                    if(crudUsuarioController.actualizarUsuario(usuario)){
+                        mostrarMensaje("Información Usuario", "Usuario Actualizado", "El usuario se actualizo correctamente.", Alert.AlertType.INFORMATION);
+                        usuarioSeleccionado.setDireccion(txtDireccion.getText());
+                        usuarioSeleccionado.setTelefono(txtTelefono.getText());
+                        usuarioSeleccionado.setNombre(txtNombre.getText());
+                        usuarioSeleccionado.setCorreo(txtCorreo.getText());
+                        TableViewUsuarios.refresh();
+                    }else {
+                        mostrarMensaje("Información Usuario", "Problema Al Actualizar", "Ocurrio un problema al intentar actualizar el usuario.", Alert.AlertType.ERROR);
+                    }
+                }else {
+                    mostrarMensaje("Información Usuario", "Dato No Modificable", "La cedula del usuario no se puede modificar.", Alert.AlertType.ERROR);
+                }
+            }else {
+                mostrarMensaje("Información Usuario", "Campos Vacíos", "Porfavor rellene los campos.", Alert.AlertType.ERROR);
+            }
+        }else {
+            mostrarMensaje("Información Usuario", "Seleccione un usuario", "Porfavor seleccione el usuario que desea actualizar.", Alert.AlertType.ERROR);
         }
     }
 

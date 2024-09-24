@@ -33,4 +33,8 @@ public class ModelFactory {
     public boolean eliminarUsuario(String cedula) {
         return billeteraDigital.eliminarUsuario(cedula);
     }
+
+    public boolean actualizarUsuario(Usuario usuario) {
+        return billeteraDigital.actualizarUsuario(usuario);
+    }
 }

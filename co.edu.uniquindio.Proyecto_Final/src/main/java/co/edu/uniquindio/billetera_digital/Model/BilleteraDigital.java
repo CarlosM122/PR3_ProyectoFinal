@@ -54,4 +54,18 @@ public class BilleteraDigital {
         return eliminado;
 
     }
+
+    public boolean actualizarUsuario(Usuario usuario) {
+        boolean actualizado = false;
+        for (Usuario usuario1 : usuarios) {
+            if (usuario.getIdUsuario().equals(usuario1.getIdUsuario())) {
+                usuarios.set(usuarios.indexOf(usuario1), usuario);
+                actualizado = true;
+                break;
+            }else {
+                actualizado=false;
+            }
+        }
+        return actualizado;
+    }
 }
