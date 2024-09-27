@@ -1,12 +1,13 @@
 package co.edu.uniquindio.billetera_digital.Controller;
 
+import co.edu.uniquindio.billetera_digital.Controller.Service.IUsuarioControllerService;
 import co.edu.uniquindio.billetera_digital.Factory.ModelFactory;
 import co.edu.uniquindio.billetera_digital.Model.Usuario;
 import javafx.collections.ObservableList;
 
 import java.util.List;
 
-public class CrudUsuario_Controller {
+public class CrudUsuario_Controller implements IUsuarioControllerService {
     static ModelFactory modelFactory;
 
     public CrudUsuario_Controller() {

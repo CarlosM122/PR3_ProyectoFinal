@@ -81,21 +81,6 @@ public class Usuario_ViewController {
 
     }
 
-    private void eliminarUsuario(String cedula) {
-        if(usuarioSeleccionado!=null){
-            if (crudUsuarioController.eliminarUsuario(cedula)) {
-                usuariosList.remove(usuarioSeleccionado);
-                limpiarCamposUsuario();
-                mostrarMensaje("Información Usuario", "Usuario Eliminado", "El usuario se ha eliminado correctamente", Alert.AlertType.INFORMATION);
-            }else{
-                mostrarMensaje("Información Usuario", "Usuario No Eliminado", "El usuario no se  ha eliminado", Alert.AlertType.ERROR);
-            }
-        }else {
-            mostrarMensaje("Información Usuario", "Seleccione un usuario", "Porfavor seleccione un usuario para eliminar", Alert.AlertType.ERROR);
-        }
-    }
-
-
     @FXML
     void initialize() {
         crudUsuarioController = new CrudUsuario_Controller();
@@ -137,6 +122,20 @@ public class Usuario_ViewController {
             }
         } else {
             mostrarMensaje("Información Usuario", "Campos Vacíos", "Por favor complete todos los campos obligatorios", Alert.AlertType.ERROR);
+        }
+    }
+
+    private void eliminarUsuario(String cedula) {
+        if(usuarioSeleccionado!=null){
+            if (crudUsuarioController.eliminarUsuario(cedula)) {
+                usuariosList.remove(usuarioSeleccionado);
+                limpiarCamposUsuario();
+                mostrarMensaje("Información Usuario", "Usuario Eliminado", "El usuario se ha eliminado correctamente", Alert.AlertType.INFORMATION);
+            }else{
+                mostrarMensaje("Información Usuario", "Usuario No Eliminado", "El usuario no se  ha eliminado", Alert.AlertType.ERROR);
+            }
+        }else {
+            mostrarMensaje("Información Usuario", "Seleccione un usuario", "Porfavor seleccione un usuario para eliminar", Alert.AlertType.ERROR);
         }
     }
 
@@ -200,12 +199,14 @@ public class Usuario_ViewController {
         alert.setContentText(contenido);
         alert.show();
     }
+
     private void listenerSelection() {
         TableViewUsuarios.getSelectionModel().selectedItemProperty().addListener((obs,oldSelection,newSelection)->{
             usuarioSeleccionado = newSelection;
             mostrarInformacionUsuario(usuarioSeleccionado);
         });
     }
+
     private void mostrarInformacionUsuario(Usuario usuario) {
         if(usuarioSeleccionado!=null){
             txtNombre.setText(usuarioSeleccionado.getNombre());

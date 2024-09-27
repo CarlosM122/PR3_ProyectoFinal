@@ -1,5 +1,6 @@
 package co.edu.uniquindio.billetera_digital.Factory;
 
+import co.edu.uniquindio.billetera_digital.Exceptions.UsuarioException;
 import co.edu.uniquindio.billetera_digital.Model.BilleteraDigital;
 import co.edu.uniquindio.billetera_digital.Model.Usuario;
 import co.edu.uniquindio.billetera_digital.Utils.BilleteraUtils;
@@ -11,11 +12,12 @@ public class ModelFactory {
     private static ModelFactory instance;
     BilleteraDigital billeteraDigital;
 
+    private static class SingletonHolder {
+        private final static ModelFactory eINSTANCE = new ModelFactory();
+    }
+
     public static ModelFactory getInstance() {
-        if (instance == null) {
-            instance = new ModelFactory();
-        }
-        return instance;
+        return SingletonHolder.eINSTANCE;
     }
 
     private ModelFactory() {
@@ -27,14 +29,29 @@ public class ModelFactory {
     }
 
     public boolean crearUsuario(Usuario usuario) {
-        return billeteraDigital.crearUsuario(usuario);
+        try {
+            return billeteraDigital.crearUsuario(usuario);
+        }catch (UsuarioException e){
+            System.out.printf(e.getMessage());
+            return false;
+        }
     }
 
     public boolean eliminarUsuario(String cedula) {
-        return billeteraDigital.eliminarUsuario(cedula);
+        try {
+            return billeteraDigital.eliminarUsuario(cedula);
+        }catch (UsuarioException e){
+            System.out.printf(e.getMessage());
+            return false;
+        }
     }
 
     public boolean actualizarUsuario(Usuario usuario) {
-        return billeteraDigital.actualizarUsuario(usuario);
+        try {
+            return billeteraDigital.actualizarUsuario(usuario);
+        }catch (UsuarioException e){
+            System.out.printf(e.getMessage());
+            return false;
+        }
     }
 }

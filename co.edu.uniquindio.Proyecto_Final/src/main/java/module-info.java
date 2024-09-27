@@ -3,6 +3,8 @@ module co.edu.uniquindio.billetera_digital {
     requires javafx.fxml;
     requires static lombok;
     requires org.mapstruct;
+    requires java.desktop;
+    requires java.logging;
 
     opens co.edu.uniquindio.billetera_digital to javafx.fxml;
     exports co.edu.uniquindio.billetera_digital;

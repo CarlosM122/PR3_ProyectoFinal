@@ -1,10 +1,11 @@
 package co.edu.uniquindio.billetera_digital.Model;
 
+import co.edu.uniquindio.billetera_digital.Exceptions.UsuarioException;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class BilleteraDigital {
-
 
     private List<Usuario> usuarios = new ArrayList<>();
 
@@ -16,13 +17,13 @@ public class BilleteraDigital {
         this.usuarios = usuarios;
     }
 
-    public boolean crearUsuario(Usuario usuario) {
+    public boolean crearUsuario(Usuario usuario) throws UsuarioException {
         Usuario usuarioEncontrado = encontrarUsuario(usuario.getIdUsuario());
         if (usuarioEncontrado == null) {
             usuarios.add(usuario);
             return true;
         }else {
-            return false;
+            throw new UsuarioException("Usuario con cedula: "+ usuario.getIdUsuario()+ " ya existe");
         }
     }
 
@@ -39,7 +40,7 @@ public class BilleteraDigital {
         return usuarioEncontrado;
     }
 
-    public boolean eliminarUsuario(String cedula) {
+    public boolean eliminarUsuario(String cedula) throws UsuarioException {
         boolean eliminado = false;
         for(Usuario usuario:usuarios){
             if (usuario.getIdUsuario().equals(cedula)) {
@@ -48,14 +49,13 @@ public class BilleteraDigital {
                 break;
             }
              else{
-                 eliminado=false;
+                 throw new UsuarioException("Usuario con cedula: "+ cedula+ " no existe");
             }
         }
         return eliminado;
-
     }
 
-    public boolean actualizarUsuario(Usuario usuario) {
+    public boolean actualizarUsuario(Usuario usuario) throws UsuarioException {
         boolean actualizado = false;
         for (Usuario usuario1 : usuarios) {
             if (usuario.getIdUsuario().equals(usuario1.getIdUsuario())) {
@@ -63,7 +63,7 @@ public class BilleteraDigital {
                 actualizado = true;
                 break;
             }else {
-                actualizado=false;
+                throw new UsuarioException("Usuario con cedula: "+ usuario.getIdUsuario()+ " no existe");
             }
         }
         return actualizado;
