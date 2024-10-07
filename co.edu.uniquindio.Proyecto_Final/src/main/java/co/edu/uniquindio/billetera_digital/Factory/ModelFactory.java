@@ -1,57 +1,139 @@
-package co.edu.uniquindio.billetera_digital.Factory;
+    package co.edu.uniquindio.billetera_digital.Factory;
 
-import co.edu.uniquindio.billetera_digital.Exceptions.UsuarioException;
-import co.edu.uniquindio.billetera_digital.Model.BilleteraDigital;
-import co.edu.uniquindio.billetera_digital.Model.Usuario;
-import co.edu.uniquindio.billetera_digital.Utils.BilleteraUtils;
+    import co.edu.uniquindio.billetera_digital.Exceptions.UsuarioException;
+    import co.edu.uniquindio.billetera_digital.Model.BilleteraDigital;
+    import co.edu.uniquindio.billetera_digital.Model.Usuario;
+    import co.edu.uniquindio.billetera_digital.Utils.BilleteraUtils;
+    import co.edu.uniquindio.billetera_digital.Utils.Persistencia;
 
-import java.util.List;
+    import java.io.IOException;
+    import java.util.List;
 
-public class ModelFactory {
+    public class ModelFactory {
 
-    private static ModelFactory instance;
-    BilleteraDigital billeteraDigital;
+        private static ModelFactory instance;
+        BilleteraDigital billeteraDigital;
 
-    private static class SingletonHolder {
-        private final static ModelFactory eINSTANCE = new ModelFactory();
-    }
+        private static class SingletonHolder {
+            private final static ModelFactory eINSTANCE = new ModelFactory();
+        }
 
-    public static ModelFactory getInstance() {
-        return SingletonHolder.eINSTANCE;
-    }
+        public static ModelFactory getInstance() {
+            return SingletonHolder.eINSTANCE;
+        }
 
-    private ModelFactory() {
-        billeteraDigital = BilleteraUtils.inicializarDatos();
-    }
+        private ModelFactory() {
+                billeteraDigital = new BilleteraDigital();
 
-    public List<Usuario> obtenerUsuarios() {
-        return billeteraDigital.getUsuarios();
-    }
+//            inicializarDatosBase();
+//            salvarDatosBase();
+//
+//            cargarDatosDesdeArchivos();
+//
+//            guardarRecursosBinario();
+//            cargarRecursosBinario();
+//
+//            cargarRecursosXML();
+//            guardarRecursosXML();
 
-    public boolean crearUsuario(Usuario usuario) {
-        try {
-            return billeteraDigital.crearUsuario(usuario);
-        }catch (UsuarioException e){
-            System.out.printf(e.getMessage());
-            return false;
+            Persistencia.guardaRegistroLog("Inicio de sesión ", 1, "inicio Sesión");
+        }
+
+        private BilleteraDigital getBilleteraDigital() {
+            return billeteraDigital;
+        }
+
+        private void cargarDatosDesdeArchivos() {
+            if(billeteraDigital == null) {
+                billeteraDigital = new BilleteraDigital();
+            }
+            try {
+                Persistencia.cargarDatosArchivos(billeteraDigital);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+
+        private void salvarDatosBase() {
+            try {
+                Persistencia.guardarUsuarios(getBilleteraDigital().getUsuarios());
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+
+        private void inicializarDatosBase() {
+            billeteraDigital = BilleteraUtils.inicializarDatos();
+        }
+
+        private void guardarRecursosBinario() {
+            Persistencia.guardarRecursoBancoBinario(billeteraDigital);
+        }
+
+        private void cargarRecursosBinario() {
+            billeteraDigital = Persistencia.cargarRecursoBancoBinario();
+        }
+
+        private void guardarRecursosXML() {
+            Persistencia.guardarRecursoBancoXML(getBilleteraDigital());
+        }
+
+        private void cargarRecursosXML() {
+            billeteraDigital = Persistencia.cargarRecursoBancoXML();
+        }
+
+        public List<Usuario> obtenerUsuarios() {
+            return billeteraDigital.getUsuarios();
+        }
+
+        public boolean crearUsuario(Usuario usuario) {
+            boolean creacion = false;
+            try {
+                creacion = billeteraDigital.crearUsuario(usuario);
+                Persistencia.guardaRegistroLog("Se creo el usuario: " + usuario.getIdUsuario(), 1, "Crear Usuario");
+                Persistencia.guardarUsuarios(billeteraDigital.getUsuarios());
+                Persistencia.guardarRecursoBancoXML(billeteraDigital);
+                Persistencia.guardarRecursoBancoBinario(billeteraDigital);
+                return creacion;
+            } catch (UsuarioException e) {
+                Persistencia.guardaRegistroLog(e.getMessage(), 2, "Crear Usuario");
+                return creacion;
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+
+        public boolean eliminarUsuario(String cedula) {
+            boolean eliminado;
+            try {
+                eliminado =  billeteraDigital.eliminarUsuario(cedula);
+                Persistencia.guardaRegistroLog("Se elimino el usuario: " + cedula, 1, "Eliminar Usuario");
+                Persistencia.guardarRecursoBancoXML(billeteraDigital);
+                Persistencia.guardarUsuarios(getBilleteraDigital().getUsuarios());
+                Persistencia.guardarRecursoBancoBinario(billeteraDigital);
+            } catch (UsuarioException e) {
+                Persistencia.guardaRegistroLog(e.getMessage(), 2, "Eliminar Usuario");
+                return false;
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+            return eliminado;
+        }
+
+        public boolean actualizarUsuario(Usuario usuario) {
+            boolean actualizado;
+            try {
+                actualizado = billeteraDigital.actualizarUsuario(usuario);
+                Persistencia.guardaRegistroLog("Se actualizo el usuario: "+usuario.getIdUsuario(), 1, "Actualiza Usuario");
+                Persistencia.guardarRecursoBancoXML(billeteraDigital);
+                Persistencia.guardarUsuarios(billeteraDigital.getUsuarios());
+                Persistencia.guardarRecursoBancoBinario(billeteraDigital);
+            } catch (UsuarioException e) {
+                Persistencia.guardaRegistroLog(e.getMessage(), 2, "Actualizar Usuario");
+                return false;
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+            return actualizado;
         }
     }
-
-    public boolean eliminarUsuario(String cedula) {
-        try {
-            return billeteraDigital.eliminarUsuario(cedula);
-        }catch (UsuarioException e){
-            System.out.printf(e.getMessage());
-            return false;
-        }
-    }
-
-    public boolean actualizarUsuario(Usuario usuario) {
-        try {
-            return billeteraDigital.actualizarUsuario(usuario);
-        }catch (UsuarioException e){
-            System.out.printf(e.getMessage());
-            return false;
-        }
-    }
-}

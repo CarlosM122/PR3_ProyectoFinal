@@ -1,10 +1,13 @@
 package co.edu.uniquindio.billetera_digital.Model;
 
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Usuario {
+public class Usuario implements Serializable {
+
+    private static final long serialVersionUID = 1L;
     private String nombre;
     private String correo;
     private String telefono;

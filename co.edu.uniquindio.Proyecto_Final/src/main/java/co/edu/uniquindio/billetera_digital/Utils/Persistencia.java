@@ -1,8 +1,7 @@
 package co.edu.uniquindio.billetera_digital.Utils;
 
-import co.edu.uniquindio.billetera_digital.Exceptions.UsuarioException;
+import co.edu.uniquindio.billetera_digital.Model.BilleteraDigital;
 import co.edu.uniquindio.billetera_digital.Model.*;
-import co.edu.uniquindio.billetera_digital.Model.Usuario;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -13,34 +12,33 @@ public class Persistencia {
 
 
     //bancoUq/src/main/resources/persistencia/archivoClientes.txt
-    public static final String RUTA_ARCHIVO_CLIENTES = "src/main/resources/persistencia/archivoClientes.txt";
+    public static final String RUTA_ARCHIVO_USUARIOS = "C:\\Users\\ASUS\\Desktop\\Programacion 2024-2\\ProyectoFinal\\PR3_ProyectoFinal\\co.edu.uniquindio.Proyecto_Final\\src\\main\\resources\\persistencia\\archivos\\archivoUsuarios.txt";
     public static final String RUTA_ARCHIVO_EMPLEADOS = "src/main/resources/persistencia/archivoEmpleados.txt";
-    public static final String RUTA_ARCHIVO_USUARIOS = "/src/main/resources/persistencia/archivoUsuarios.txt";
-    public static final String RUTA_ARCHIVO_LOG = "src/main/resources/persistencia/log/BancoLog.txt";
+    public static final String RUTA_ARCHIVO_CUENTAS = "/src/main/resources/persistencia/archivoUsuarios.txt.txt";
+    public static final String RUTA_ARCHIVO_LOG = "C:\\Users\\ASUS\\Desktop\\Programacion 2024-2\\ProyectoFinal\\PR3_ProyectoFinal\\co.edu.uniquindio.Proyecto_Final\\src\\main\\resources\\persistencia\\log\\BilleteraLog.txt";
     public static final String RUTA_ARCHIVO_OBJETOS = "co.edu.uniquindio.programacion3/src/main/resources/persistencia/archivoObjetos.txt";
-    public static final String RUTA_ARCHIVO_MODELO_BANCO_BINARIO = "src/main/resources/persistencia/model.dat";
-    public static final String RUTA_ARCHIVO_MODELO_BANCO_XML = "src/main/resources/persistencia/model.xml";
+    public static final String RUTA_ARCHIVO_MODELO_BILLETERADIGITAL_BINARIO = "C:\\Users\\ASUS\\Desktop\\Programacion 2024-2\\ProyectoFinal\\PR3_ProyectoFinal\\co.edu.uniquindio.Proyecto_Final\\src\\main\\resources\\persistencia\\model.dat";
+    public static final String RUTA_ARCHIVO_MODELO_BILLETERA_DIGITAL_XML = "C:\\Users\\ASUS\\Desktop\\Programacion 2024-2\\ProyectoFinal\\PR3_ProyectoFinal\\co.edu.uniquindio.Proyecto_Final\\src\\main\\resources\\persistencia\\model.xml";
 //	C:\td\persistencia
 
 
-//    public static void cargarDatosArchivos(Banco banco) throws FileNotFoundException, IOException {
-//        //cargar archivo de clientes
-//        ArrayList<Cliente> clientesCargados = cargarUsuarios();
-//        if (clientesCargados.size() > 0)
-//            banco.getListaClientes().addAll(clientesCargados);
-//
+    public static void cargarDatosArchivos(BilleteraDigital billeteraDigital) throws FileNotFoundException, IOException {
+        ArrayList<Usuario> usuariosCargados = cargarUsuarios();
+        if (usuariosCargados.size() > 0)
+            billeteraDigital.getUsuarios().addAll(usuariosCargados);
+
 //        //cargar archivos empleados
 //        ArrayList<Empleado> empleadosCargados = cargarEmpleados();
 //        if (empleadosCargados.size() > 0)
-//            banco.getListaEmpleados().addAll(empleadosCargados);
-//
-//        //cargar archivo transcciones
-//
-//        //cargar archivo empleados
-//
-//        //cargar archivo prestamo
-//
-//    }
+//            billeteraDigital.getListaEmpleados().addAll(empleadosCargados);
+
+        //cargar archivo transcciones
+
+        //cargar archivo empleados
+
+        //cargar archivo prestamo
+
+    }
 
     /**
      * Guarda en un archivo de texto todos la información de las personas almacenadas en el ArrayList
@@ -49,14 +47,14 @@ public class Persistencia {
      * @param
      * @throws IOException
      */
-    public static void guardarUsuario(ArrayList<Usuario> listaUsuario) throws IOException {
+    public static void guardarUsuarios(ArrayList<Usuario> listaUsuario) throws IOException {
         // TODO Auto-generated method stub
         String contenido = "";
         for (Usuario usuario : listaUsuario) {
-            contenido += usuario.getNombre() + "," + usuario.getIdUsuario() + "," + usuario.getTelefono() + "," + usuario.getDireccion()
-                    + "," + usuario.getCorreo() + "," + "\n";
+            contenido += usuario.getNombre() + "@@" + usuario.getIdUsuario() + "@@" + usuario.getTelefono() + "@@" + usuario.getDireccion()
+                    + "@@" + usuario.getCorreo() + "@@" + "\n";
         }
-        ArchivoUtil.guardarArchivo(RUTA_ARCHIVO_CLIENTES, contenido, false);
+        ArchivoUtil.guardarArchivo(RUTA_ARCHIVO_USUARIOS, contenido, false);
     }
 
 
@@ -84,16 +82,16 @@ public class Persistencia {
      */
     public static ArrayList<Usuario> cargarUsuarios() throws FileNotFoundException, IOException {
         ArrayList<Usuario> usuarios = new ArrayList<Usuario>();
-        ArrayList<String> contenido = ArchivoUtil.leerArchivo(RUTA_ARCHIVO_CLIENTES);
+        ArrayList<String> contenido = ArchivoUtil.leerArchivo(RUTA_ARCHIVO_USUARIOS);
         String linea = "";
         for (int i = 0; i < contenido.size(); i++) {
             linea = contenido.get(i);//juan,arias,125454,Armenia,uni1@,12454,125444
             Usuario usuario = new Usuario();
-            usuario.setNombre(linea.split(",")[0]);
-            usuario.setIdUsuario(linea.split(",")[1]);
-            usuario.setTelefono(linea.split(",")[2]);
-            usuario.setDireccion(linea.split(",")[3]);
-            usuario.setCorreo(linea.split(",")[4]);
+            usuario.setNombre(linea.split("@@")[0]);
+            usuario.setIdUsuario(linea.split("@@")[1]);
+            usuario.setTelefono(linea.split("@@")[2]);
+            usuario.setDireccion(linea.split("@@")[3]);
+            usuario.setCorreo(linea.split("@@")[4]);
             usuarios.add(usuario);
         }
         return usuarios;
@@ -188,53 +186,53 @@ public class Persistencia {
     //------------------------------------SERIALIZACIÓN  y XML
 
 
-//    public static Banco cargarRecursoBancoBinario() {
-//
-//        Banco banco = null;
-//
-//        try {
-//            banco = (Banco) ArchivoUtil.cargarRecursoSerializado(RUTA_ARCHIVO_MODELO_BANCO_BINARIO);
-//        } catch (Exception e) {
-//            // TODO Auto-generated catch block
-//            e.printStackTrace();
-//        }
-//        return banco;
-//    }
-//
-//    public static void guardarRecursoBancoBinario(Banco banco) {
-//        try {
-//            ArchivoUtil.salvarRecursoSerializado(RUTA_ARCHIVO_MODELO_BANCO_BINARIO, banco);
-//        } catch (Exception e) {
-//            // TODO Auto-generated catch block
-//            e.printStackTrace();
-//        }
-//    }
-//
-//
-//    public static Banco cargarRecursoBancoXML() {
-//
-//        Banco banco = null;
-//
-//        try {
-//            banco = (Banco) ArchivoUtil.cargarRecursoSerializadoXML(RUTA_ARCHIVO_MODELO_BANCO_XML);
-//        } catch (Exception e) {
-//            // TODO Auto-generated catch block
-//            e.printStackTrace();
-//        }
-//        return banco;
-//
-//    }
-//
-//
-//    public static void guardarRecursoBancoXML(Banco banco) {
-//
-//        try {
-//            ArchivoUtil.salvarRecursoSerializadoXML(RUTA_ARCHIVO_MODELO_BANCO_XML, banco);
-//        } catch (Exception e) {
-//            // TODO Auto-generated catch block
-//            e.printStackTrace();
-//        }
-//    }
+    public static BilleteraDigital cargarRecursoBancoBinario() {
+
+        BilleteraDigital billeteraDigital = null;
+
+        try {
+            billeteraDigital = (BilleteraDigital) ArchivoUtil.cargarRecursoSerializado(RUTA_ARCHIVO_MODELO_BILLETERADIGITAL_BINARIO);
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return billeteraDigital;
+    }
+
+    public static void guardarRecursoBancoBinario(BilleteraDigital billeteraDigital) {
+        try {
+            ArchivoUtil.salvarRecursoSerializado(RUTA_ARCHIVO_MODELO_BILLETERADIGITAL_BINARIO, billeteraDigital);
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
+
+
+    public static BilleteraDigital cargarRecursoBancoXML() {
+
+        BilleteraDigital billeteraDigital = null;
+
+        try {
+            billeteraDigital = (BilleteraDigital)ArchivoUtil.cargarRecursoSerializadoXML(RUTA_ARCHIVO_MODELO_BILLETERA_DIGITAL_XML);
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return billeteraDigital;
+
+    }
+
+
+    public static void guardarRecursoBancoXML(BilleteraDigital billeteraDigital) {
+
+        try {
+            ArchivoUtil.salvarRecursoSerializadoXML(RUTA_ARCHIVO_MODELO_BILLETERA_DIGITAL_XML, billeteraDigital);
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
 
 
 }

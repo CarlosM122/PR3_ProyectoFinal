@@ -95,7 +95,10 @@ public class Usuario_ViewController {
     }
 
     private void obtenerUsuarios() {
+        usuariosList.clear();
         usuariosList.addAll(crudUsuarioController.obtenerUsuarios());
+        TableViewUsuarios.setItems(usuariosList);
+        TableViewUsuarios.refresh();
     }
 
     private void initDataBinding() {
@@ -150,6 +153,7 @@ public class Usuario_ViewController {
                         usuarioSeleccionado.setTelefono(txtTelefono.getText());
                         usuarioSeleccionado.setNombre(txtNombre.getText());
                         usuarioSeleccionado.setCorreo(txtCorreo.getText());
+                        limpiarCamposUsuario();
                         TableViewUsuarios.refresh();
                     }else {
                         mostrarMensaje("Información Usuario", "Problema Al Actualizar", "Ocurrio un problema al intentar actualizar el usuario.", Alert.AlertType.ERROR);
@@ -190,7 +194,6 @@ public class Usuario_ViewController {
         txtNombre.clear();
         txtTelefono.clear();
     }
-
 
     private void mostrarMensaje(String titulo, String header, String contenido, Alert.AlertType alertType) {
         Alert alert = new Alert(alertType);

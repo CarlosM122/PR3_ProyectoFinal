@@ -2,7 +2,11 @@ package co.edu.uniquindio.billetera_digital.Model;
 
 import lombok.Data;
 
-public class Cuenta {
+import java.io.Serializable;
+
+public class Cuenta implements Serializable {
+
+    private static final long serialVersionUID = 1L;
     private String nombreBanco;
     private int numeroCuenta;
     private String tipoCuenta;

@@ -149,7 +149,6 @@ public  class ArchivoUtil {
     public static Object cargarRecursoSerializado(String rutaArchivo)throws Exception
     {
         Object aux = null;
-//		Empresa empresa = null;
         ObjectInputStream ois = null;
         try {
             // Se crea un ObjectInputStream
@@ -182,7 +181,6 @@ public  class ArchivoUtil {
 
 
 
-
     public static Object cargarRecursoSerializadoXML(String rutaArchivo) throws IOException {
 
         XMLDecoder decodificadorXML;
@@ -204,8 +202,4 @@ public  class ArchivoUtil {
         codificadorXML.close();
 
     }
-
-
-
-
 }

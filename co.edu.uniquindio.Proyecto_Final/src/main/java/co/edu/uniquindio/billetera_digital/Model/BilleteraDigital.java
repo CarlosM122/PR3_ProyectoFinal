@@ -2,19 +2,41 @@ package co.edu.uniquindio.billetera_digital.Model;
 
 import co.edu.uniquindio.billetera_digital.Exceptions.UsuarioException;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BilleteraDigital {
+public class BilleteraDigital implements Serializable {
 
-    private List<Usuario> usuarios = new ArrayList<>();
+    private static final long serialVersionUID = 1L;
+    private ArrayList<Usuario> usuarios = new ArrayList<>();
+    private ArrayList<Cuenta> cuentas = new ArrayList<>();
+    private ArrayList<Transaccion> transacciones = new ArrayList<>();
 
-    public List<Usuario> getUsuarios() {
+    public BilleteraDigital() {
+    }
+    public ArrayList<Usuario> getUsuarios() {
         return usuarios;
     }
 
-    public void setUsuarios(List<Usuario> usuarios) {
+    public void setUsuarios(ArrayList<Usuario> usuarios) {
         this.usuarios = usuarios;
+    }
+
+    public ArrayList<Cuenta> getCuentas() {
+        return cuentas;
+    }
+
+    public void setCuentas(ArrayList<Cuenta> cuentas) {
+        this.cuentas = cuentas;
+    }
+
+    public ArrayList<Transaccion> getTransacciones() {
+        return transacciones;
+    }
+
+    public void setTransacciones(ArrayList<Transaccion> transacciones) {
+        this.transacciones = transacciones;
     }
 
     public boolean crearUsuario(Usuario usuario) throws UsuarioException {
@@ -48,9 +70,9 @@ public class BilleteraDigital {
                 eliminado = true;
                 break;
             }
-             else{
-                 throw new UsuarioException("Usuario con cedula: "+ cedula+ " no existe");
-            }
+        }
+        if (!eliminado) {
+            throw new UsuarioException("Usuario con cedula: "+ cedula+ " no existe");
         }
         return eliminado;
     }
@@ -62,9 +84,10 @@ public class BilleteraDigital {
                 usuarios.set(usuarios.indexOf(usuario1), usuario);
                 actualizado = true;
                 break;
-            }else {
-                throw new UsuarioException("Usuario con cedula: "+ usuario.getIdUsuario()+ " no existe");
             }
+        }
+        if(!actualizado){
+                throw new UsuarioException("Usuario con cedula: "+ usuario.getIdUsuario()+ " no existe");
         }
         return actualizado;
     }
