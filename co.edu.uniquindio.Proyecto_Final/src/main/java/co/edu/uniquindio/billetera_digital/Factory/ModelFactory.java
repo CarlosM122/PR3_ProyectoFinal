@@ -1,5 +1,6 @@
     package co.edu.uniquindio.billetera_digital.Factory;
 
+    import co.edu.uniquindio.billetera_digital.Exceptions.LoginException;
     import co.edu.uniquindio.billetera_digital.Exceptions.UsuarioException;
     import co.edu.uniquindio.billetera_digital.Model.BilleteraDigital;
     import co.edu.uniquindio.billetera_digital.Model.Usuario;
@@ -25,13 +26,13 @@
         private ModelFactory() {
                 billeteraDigital = new BilleteraDigital();
 
-//            inicializarDatosBase();
+              //inicializarDatosBase();
 //            salvarDatosBase();
 //
 //            cargarDatosDesdeArchivos();
 //
-//            guardarRecursosBinario();
-//            cargarRecursosBinario();
+              //guardarRecursosBinario();
+              cargarRecursosBinario();
 //
 //            cargarRecursosXML();
 //            guardarRecursosXML();
@@ -44,9 +45,6 @@
         }
 
         private void cargarDatosDesdeArchivos() {
-            if(billeteraDigital == null) {
-                billeteraDigital = new BilleteraDigital();
-            }
             try {
                 Persistencia.cargarDatosArchivos(billeteraDigital);
             } catch (IOException e) {
@@ -80,6 +78,31 @@
 
         private void cargarRecursosXML() {
             billeteraDigital = Persistencia.cargarRecursoBancoXML();
+        }
+
+        public boolean iniciarSesion(String user, String password) {
+            boolean respuesta = false;
+            try {
+                respuesta = Persistencia.iniciarSesion(user, password);
+                Persistencia.guardaRegistroLog("Inicio Sesion: "+user,1,"Inicio De Sesion");
+                return respuesta;
+            }catch (LoginException e){
+                Persistencia.guardaRegistroLog(e.getMessage(), 2, "Iniciar Sesion");
+                return respuesta;
+            }
+        }
+
+        public boolean registrarUsuario(String user, String password) {
+            boolean respuesta = false;
+            try {
+                respuesta = Persistencia.registroUsuario(user, password);
+                Persistencia.guardaRegistroLog("Registro De Usuario: "+user,1,"Registro");
+                return respuesta;
+            }catch (LoginException e){
+                Persistencia.guardaRegistroLog(e.getMessage(), 2, "Registro usuario");
+                return respuesta;
+            }
+
         }
 
         public List<Usuario> obtenerUsuarios() {

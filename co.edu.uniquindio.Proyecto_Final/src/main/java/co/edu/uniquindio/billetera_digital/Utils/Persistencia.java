@@ -3,6 +3,7 @@ package co.edu.uniquindio.billetera_digital.Utils;
 import co.edu.uniquindio.billetera_digital.Model.BilleteraDigital;
 import co.edu.uniquindio.billetera_digital.Model.*;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -19,8 +20,18 @@ public class Persistencia {
     public static final String RUTA_ARCHIVO_OBJETOS = "co.edu.uniquindio.programacion3/src/main/resources/persistencia/archivoObjetos.txt";
     public static final String RUTA_ARCHIVO_MODELO_BILLETERADIGITAL_BINARIO = "C:\\Users\\ASUS\\Desktop\\Programacion 2024-2\\ProyectoFinal\\PR3_ProyectoFinal\\co.edu.uniquindio.Proyecto_Final\\src\\main\\resources\\persistencia\\model.dat";
     public static final String RUTA_ARCHIVO_MODELO_BILLETERA_DIGITAL_XML = "C:\\Users\\ASUS\\Desktop\\Programacion 2024-2\\ProyectoFinal\\PR3_ProyectoFinal\\co.edu.uniquindio.Proyecto_Final\\src\\main\\resources\\persistencia\\model.xml";
+    public static final String RUTA_USERS_PROPERTIES = "C:\\Users\\ASUS\\Desktop\\Programacion 2024-2\\ProyectoFinal\\PR3_ProyectoFinal\\co.edu.uniquindio.Proyecto_Final\\src\\main\\resources\\persistencia\\archivos\\cuentas.properties";
 //	C:\td\persistencia
 
+
+
+    public static boolean iniciarSesion(String user, String password){
+        return ArchivoUtil.iniciarSesion(user,password,RUTA_USERS_PROPERTIES);
+    }
+
+    public static boolean registroUsuario(String user, String password){
+        return ArchivoUtil.registrarUsuario(user,password,RUTA_USERS_PROPERTIES);
+    }
 
     public static void cargarDatosArchivos(BilleteraDigital billeteraDigital) throws FileNotFoundException, IOException {
         ArrayList<Usuario> usuariosCargados = cargarUsuarios();

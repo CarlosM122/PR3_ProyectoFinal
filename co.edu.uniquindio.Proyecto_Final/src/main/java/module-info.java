@@ -16,4 +16,6 @@ module co.edu.uniquindio.billetera_digital {
     exports co.edu.uniquindio.billetera_digital.Mappings.Mapper;
     exports co.edu.uniquindio.billetera_digital.Mappings.Dto;
     exports co.edu.uniquindio.billetera_digital.Model;
+    opens co.edu.uniquindio.billetera_digital.Exceptions;
+    exports co.edu.uniquindio.billetera_digital.Exceptions;
 }

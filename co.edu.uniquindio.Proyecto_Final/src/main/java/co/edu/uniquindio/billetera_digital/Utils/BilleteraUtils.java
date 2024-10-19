@@ -24,7 +24,7 @@ public class BilleteraUtils {
         billeteraDigital.getCuentas().add(cuenta2);
 
         Usuario usuario = new Usuario();
-        usuario.setNombre("Saul");
+        usuario.setNombre("Luisa");
         usuario.setIdUsuario("8716321");
         usuario.setCorreo("samira@gmail.com");
         usuario.setTelefono("300 671376");
