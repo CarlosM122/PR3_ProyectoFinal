@@ -1,23 +1,58 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<java version="21.0.2" class="java.beans.XMLDecoder">
+<java version="17.0.8" class="java.beans.XMLDecoder">
  <object class="co.edu.uniquindio.billetera_digital.Model.BilleteraDigital" id="BilleteraDigital0">
-  <void property="usuarios">
+  <void property="cuentas">
    <void method="add">
-    <object class="co.edu.uniquindio.billetera_digital.Model.Usuario">
-     <void property="correo">
-      <string>samira@gmail.com</string>
+    <object class="co.edu.uniquindio.billetera_digital.Model.Cuenta" id="Cuenta0">
+     <void property="nombreBanco">
+      <string>Bancolombia</string>
      </void>
-     <void property="direccion">
-      <string>Calle 65 #89-10</string>
+     <void property="numeroCuenta">
+      <int>14131313</int>
      </void>
-     <void property="idUsuario">
-      <string>8716321</string>
+     <void property="tipoCuenta">
+      <string>Ahorro</string>
      </void>
-     <void property="nombre">
-      <string>Luis</string>
+    </object>
+   </void>
+   <void method="add">
+    <object class="co.edu.uniquindio.billetera_digital.Model.Cuenta" id="Cuenta1">
+     <void property="nombreBanco">
+      <string>Bancolombia</string>
      </void>
-     <void property="telefono">
-      <string>300 671376</string>
+     <void property="numeroCuenta">
+      <int>15624238</int>
+     </void>
+     <void property="tipoCuenta">
+      <string>Ahorro</string>
+     </void>
+    </object>
+   </void>
+  </void>
+  <void property="transacciones">
+   <void method="add">
+    <object class="co.edu.uniquindio.billetera_digital.Model.Transaccion">
+     <void property="categoria">
+      <object class="co.edu.uniquindio.billetera_digital.Model.Categoria">
+       <void property="descripcion">
+        <string></string>
+       </void>
+       <void property="nombre">
+        <string>Deposito</string>
+       </void>
+      </object>
+     </void>
+     <void property="cuentaDestino">
+      <object idref="Cuenta1"/>
+     </void>
+     <void property="cuentaOrigen">
+      <object idref="Cuenta0"/>
+     </void>
+     <void property="monto">
+      <double>15000.0</double>
+     </void>
+     <void property="tipoTransaccion">
+      <string>Deposito</string>
      </void>
     </object>
    </void>

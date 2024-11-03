@@ -3,7 +3,6 @@ package co.edu.uniquindio.billetera_digital.Utils;
 import co.edu.uniquindio.billetera_digital.Model.BilleteraDigital;
 import co.edu.uniquindio.billetera_digital.Model.*;
 
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -13,14 +12,15 @@ public class Persistencia {
 
 
     //bancoUq/src/main/resources/persistencia/archivoClientes.txt
-    public static final String RUTA_ARCHIVO_USUARIOS = "C:\\Users\\ASUS\\Desktop\\Programacion 2024-2\\ProyectoFinal\\PR3_ProyectoFinal\\co.edu.uniquindio.Proyecto_Final\\src\\main\\resources\\persistencia\\archivos\\archivoUsuarios.txt";
+    public static final String RUTA_ARCHIVO_USUARIOS = "src/main/resources/persistencia/archivos/archivoUsuarios.txt";
     public static final String RUTA_ARCHIVO_EMPLEADOS = "src/main/resources/persistencia/archivoEmpleados.txt";
-    public static final String RUTA_ARCHIVO_CUENTAS = "/src/main/resources/persistencia/archivoUsuarios.txt.txt";
-    public static final String RUTA_ARCHIVO_LOG = "C:\\Users\\ASUS\\Desktop\\Programacion 2024-2\\ProyectoFinal\\PR3_ProyectoFinal\\co.edu.uniquindio.Proyecto_Final\\src\\main\\resources\\persistencia\\log\\BilleteraLog.txt";
+    public static final String RUTA_ARCHIVO_PROPERTIES = "/src/main/resources/persistencia/archivoUsuarios.txt.txt";
+    public static final String RUTA_ARCHIVO_LOG = "src/main/resources/persistencia/log/BilleteraLog.txt";
     public static final String RUTA_ARCHIVO_OBJETOS = "co.edu.uniquindio.programacion3/src/main/resources/persistencia/archivoObjetos.txt";
-    public static final String RUTA_ARCHIVO_MODELO_BILLETERADIGITAL_BINARIO = "C:\\Users\\ASUS\\Desktop\\Programacion 2024-2\\ProyectoFinal\\PR3_ProyectoFinal\\co.edu.uniquindio.Proyecto_Final\\src\\main\\resources\\persistencia\\model.dat";
-    public static final String RUTA_ARCHIVO_MODELO_BILLETERA_DIGITAL_XML = "C:\\Users\\ASUS\\Desktop\\Programacion 2024-2\\ProyectoFinal\\PR3_ProyectoFinal\\co.edu.uniquindio.Proyecto_Final\\src\\main\\resources\\persistencia\\model.xml";
-    public static final String RUTA_USERS_PROPERTIES = "C:\\Users\\ASUS\\Desktop\\Programacion 2024-2\\ProyectoFinal\\PR3_ProyectoFinal\\co.edu.uniquindio.Proyecto_Final\\src\\main\\resources\\persistencia\\archivos\\cuentas.properties";
+    public static final String RUTA_ARCHIVO_MODELO_BILLETERADIGITAL_BINARIO = "src/main/resources/persistencia/model.dat";
+    public static final String RUTA_ARCHIVO_MODELO_BILLETERA_DIGITAL_XML = "src/main/resources/persistencia/model.xml";
+    public static final String RUTA_USERS_PROPERTIES = "src/main/resources/persistencia/archivos/cuentas.properties";
+    public static final String RUTA_ARCHIVO_CUENTAS = "src/main/resources/persistencia/archivos/archivoCuenta.txt";
 //	C:\td\persistencia
 
 
@@ -246,4 +246,11 @@ public class Persistencia {
     }
 
 
+    public static void guardarCuentas(ArrayList<Cuenta> listacuentas) throws IOException {
+        String contenido = "";
+        for(Cuenta cuenta : listacuentas) {
+            contenido +=cuenta.getNombreBanco()+"/"+cuenta.getTipoCuenta()+"/"+cuenta.getIdCuenta()+"/"+cuenta.getNumeroCuenta()+"\n";
+        }
+        ArchivoUtil.guardarArchivo(RUTA_ARCHIVO_CUENTAS, contenido, false);
+    }
 }

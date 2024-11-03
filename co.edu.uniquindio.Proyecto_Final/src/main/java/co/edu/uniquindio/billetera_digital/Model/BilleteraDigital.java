@@ -12,6 +12,7 @@ public class BilleteraDigital implements Serializable {
     private ArrayList<Usuario> usuarios = new ArrayList<>();
     private ArrayList<Cuenta> cuentas = new ArrayList<>();
     private ArrayList<Transaccion> transacciones = new ArrayList<>();
+    private ArrayList<Presupuesto> presupuestos = new ArrayList<>();
 
     public BilleteraDigital() {
     }
@@ -37,6 +38,14 @@ public class BilleteraDigital implements Serializable {
 
     public void setTransacciones(ArrayList<Transaccion> transacciones) {
         this.transacciones = transacciones;
+    }
+
+    public ArrayList<Presupuesto> getPresupuestos() {
+        return presupuestos;
+    }
+
+    public void setPresupuestos(ArrayList<Presupuesto> presupuestos) {
+        this.presupuestos = presupuestos;
     }
 
     public boolean crearUsuario(Usuario usuario) throws UsuarioException {
@@ -91,4 +100,106 @@ public class BilleteraDigital implements Serializable {
         }
         return actualizado;
     }
+
+    public boolean crearCuenta(Cuenta cuenta) {
+        Cuenta cuentaEncontrado = encontrarCuenta(cuenta.getIdCuenta());
+        if (cuentaEncontrado == null) {
+            cuentas.add(cuenta);
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    private Cuenta encontrarCuenta(int idCuenta) {
+        Cuenta cuentaEncontrada = null;
+        for(Cuenta cuenta: cuentas){
+            if (cuenta.getIdCuenta() == idCuenta) {
+                cuentaEncontrada = cuenta;
+                break;
+            }else{
+                cuentaEncontrada = null;
+            }
+        }return cuentaEncontrada;
+    }
+
+    public boolean actualizarCuenta(Cuenta cuenta) {
+        boolean actualizado = false;
+        for (Cuenta cuenta1 : cuentas) {
+            if(cuenta.getIdCuenta() == cuenta1.getIdCuenta()){
+                cuentas.set(cuentas.indexOf(cuenta1), cuenta);
+                actualizado = true;
+                break;
+            }else{
+                actualizado = false;
+            }
+        }
+        return actualizado;
+    }
+
+    public boolean eliminarCuenta(String idCuenta) {
+        boolean eliminado = false;
+        int idCuentaInt = Integer.parseInt(idCuenta);  // Convertir String a int
+        for (Cuenta cuenta : cuentas) {
+            if (cuenta.getIdCuenta() == idCuentaInt) {  // Usar == para comparar int
+                cuentas.remove(cuenta);
+                eliminado = true;
+                break;
+            }else {
+                eliminado = false;
+            }
+        }
+        return eliminado;
+    }
+
+    public boolean CrearPresupuesto(Presupuesto presupuesto) {
+        Presupuesto presupuestoEncontrado = encontrarPresupuesto(presupuesto.getIdPresupuesto());
+        if (presupuestoEncontrado == null) {
+            presupuestos.add(presupuesto);
+            return true;
+        }else {
+            return false;
+        }
+    }
+
+    private Presupuesto encontrarPresupuesto(int idPresupuesto) {
+        Presupuesto presupuestoEncontrado = null;
+        for (Presupuesto presupuesto : presupuestos) {
+            if (presupuesto.getIdPresupuesto() == idPresupuesto) {
+                presupuestoEncontrado = presupuesto;
+                break;
+            }else {
+                presupuestoEncontrado = null;
+            }
+        }
+        return presupuestoEncontrado;
+    }
+
+    public boolean actualizarPresupuesto(Presupuesto presupuesto) {
+        boolean actualizado = false;
+        for (Presupuesto presupuesto1 : presupuestos) {
+            if (presupuesto.getIdPresupuesto()==(presupuesto1.getIdPresupuesto())) {
+                presupuestos.set(presupuestos.indexOf(presupuesto1), presupuesto);
+                actualizado = true;
+                break;
+            }else {
+                actualizado=false;
+            }
+        }
+        return actualizado;
+    }
+
+    public boolean eliminarPresupuesto(String idPresupuesto) {
+        boolean eliminado = false;
+        int idPresupuestoInt = Integer.parseInt(idPresupuesto);
+        for (Presupuesto presupuesto : presupuestos) {
+            if (presupuesto.getIdPresupuesto() == idPresupuestoInt) {
+                presupuestos.remove(presupuesto);
+                eliminado = true;
+                break;
+            }
+        }return eliminado;
+    }
+
+
 }

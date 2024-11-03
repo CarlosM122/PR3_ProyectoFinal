@@ -1,0 +1,2 @@
+nov. 03, 2024 3:50:57 P. M. co.edu.uniquindio.billetera_digital.Utils.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: inicio Sesión,Inicio de sesión ,2024-11-03

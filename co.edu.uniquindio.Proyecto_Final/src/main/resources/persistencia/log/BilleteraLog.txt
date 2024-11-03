@@ -258,3 +258,23 @@ oct 19, 2024 2:02:41 P. M. co.edu.uniquindio.billetera_digital.Utils.ArchivoUt
 INFO: inicio Sesión,Inicio de sesión ,2024-10-19
 oct 19, 2024 2:02:46 P. M. co.edu.uniquindio.billetera_digital.Utils.ArchivoUtil guardarRegistroLog
 WARNING: Iniciar Sesion,El usuario no existe,2024-10-19
+nov. 03, 2024 3:55:14 P. M. co.edu.uniquindio.billetera_digital.Utils.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: inicio Sesión,Inicio de sesión ,2024-11-03
+nov. 03, 2024 3:55:19 P. M. co.edu.uniquindio.billetera_digital.Utils.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: inicio Sesión,Inicio de sesión ,2024-11-03
+nov. 03, 2024 3:56:03 P. M. co.edu.uniquindio.billetera_digital.Utils.ArchivoUtil guardarRegistroLog
+ADVERTENCIA: Registro usuario,El usuario ya existe,2024-11-03
+nov. 03, 2024 3:56:10 P. M. co.edu.uniquindio.billetera_digital.Utils.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: Inicio De Sesion,Inicio Sesion: admin,2024-11-03
+nov. 03, 2024 3:56:23 P. M. co.edu.uniquindio.billetera_digital.Utils.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: Eliminar Usuario,Se elimino el usuario: 8716321,2024-11-03
+nov. 03, 2024 4:23:28 P. M. co.edu.uniquindio.billetera_digital.Utils.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: inicio Sesión,Inicio de sesión ,2024-11-03
+nov. 03, 2024 4:40:29 P. M. co.edu.uniquindio.billetera_digital.Utils.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: inicio Sesión,Inicio de sesión ,2024-11-03
+nov. 03, 2024 4:40:35 P. M. co.edu.uniquindio.billetera_digital.Utils.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: inicio Sesión,Inicio de sesión ,2024-11-03
+nov. 03, 2024 4:41:49 P. M. co.edu.uniquindio.billetera_digital.Utils.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: inicio Sesión,Inicio de sesión ,2024-11-03
+nov 03, 2024 4:52:32 P. M. co.edu.uniquindio.billetera_digital.Utils.ArchivoUtil guardarRegistroLog
+INFO: inicio Sesión,Inicio de sesión ,2024-11-03

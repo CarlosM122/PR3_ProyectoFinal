@@ -10,7 +10,7 @@ public class Cuenta implements Serializable {
     private String nombreBanco;
     private int numeroCuenta;
     private String tipoCuenta;
-    private final int idCuenta;
+    private int idCuenta;
     private static int contadorCuentas;
 
     public Cuenta() {
@@ -23,6 +23,10 @@ public class Cuenta implements Serializable {
 
     public void setNombreBanco(String nombreBanco) {
         this.nombreBanco = nombreBanco;
+    }
+
+    public void setIdCuenta(int idCuenta) {
+        this.idCuenta = idCuenta;
     }
 
     public int getNumeroCuenta() {
@@ -45,6 +49,7 @@ public class Cuenta implements Serializable {
         return idCuenta;
     }
 
+
     public static int getContadorCuentas() {
         return contadorCuentas;
     }
@@ -53,3 +58,4 @@ public class Cuenta implements Serializable {
         Cuenta.contadorCuentas = contadorCuentas;
     }
 }
+

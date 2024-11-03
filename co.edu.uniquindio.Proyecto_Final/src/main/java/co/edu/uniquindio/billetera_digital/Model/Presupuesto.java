@@ -11,14 +11,16 @@ public class Presupuesto implements Serializable {
     private String nombre;
     private double montoTotalAsignado;
     private double montoGastado;
-    private final int idPresupuesto;
-    private static int numPresupuestos;
+    private  int idPresupuesto;
+
     private Categoria categoria;
 
     public Presupuesto() {
-        idPresupuesto = ++numPresupuestos;
     }
 
+    public void setIdPresupuesto(int idPresupuesto) {
+        this.idPresupuesto = idPresupuesto;
+    }
     public String getNombre() {
         return nombre;
     }
@@ -45,14 +47,6 @@ public class Presupuesto implements Serializable {
 
     public int getIdPresupuesto() {
         return idPresupuesto;
-    }
-
-    public static int getNumPresupuestos() {
-        return numPresupuestos;
-    }
-
-    public static void setNumPresupuestos(int numPresupuestos) {
-        Presupuesto.numPresupuestos = numPresupuestos;
     }
 
     public Categoria getCategoria() {

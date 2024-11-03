@@ -3,6 +3,8 @@
     import co.edu.uniquindio.billetera_digital.Exceptions.LoginException;
     import co.edu.uniquindio.billetera_digital.Exceptions.UsuarioException;
     import co.edu.uniquindio.billetera_digital.Model.BilleteraDigital;
+    import co.edu.uniquindio.billetera_digital.Model.Cuenta;
+    import co.edu.uniquindio.billetera_digital.Model.Presupuesto;
     import co.edu.uniquindio.billetera_digital.Model.Usuario;
     import co.edu.uniquindio.billetera_digital.Utils.BilleteraUtils;
     import co.edu.uniquindio.billetera_digital.Utils.Persistencia;
@@ -108,7 +110,6 @@
         public List<Usuario> obtenerUsuarios() {
             return billeteraDigital.getUsuarios();
         }
-
         public boolean crearUsuario(Usuario usuario) {
             boolean creacion = false;
             try {
@@ -158,5 +159,79 @@
                 throw new RuntimeException(e);
             }
             return actualizado;
+        }
+
+        public boolean crearCuenta(Cuenta cuenta) {
+            boolean crear = false;
+            crear =billeteraDigital.crearCuenta(cuenta);
+            Persistencia.guardaRegistroLog("Se creo la cuenta: " + cuenta.getIdCuenta(), 1, "Crear Cuenta");
+            if(crear){
+                try {
+                    Persistencia.guardarCuentas(billeteraDigital.getCuentas());
+                    Persistencia.guardarRecursoBancoXML(billeteraDigital);
+                    Persistencia.guardarRecursoBancoBinario(billeteraDigital);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+            return crear;
+        }
+
+        public boolean actualizarCuenta(Cuenta cuenta) {
+            boolean actualizado = false;
+            actualizado= billeteraDigital.actualizarCuenta(cuenta);
+            Persistencia.guardaRegistroLog("Se actualizo la cuenta: " + cuenta.getIdCuenta(), 1, "Actualizar Cuenta");
+            if(actualizado){
+                try {
+                    Persistencia.guardarCuentas(billeteraDigital.getCuentas());
+                    Persistencia.guardarRecursoBancoXML(billeteraDigital);
+                    Persistencia.guardarRecursoBancoBinario(billeteraDigital);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+            return actualizado;
+        }
+
+        public boolean eliminarCuenta(String idCuenta) {
+            boolean eliminado = false;
+            eliminado=billeteraDigital.eliminarCuenta(idCuenta);
+            Persistencia.guardaRegistroLog("Se Elimino la cuenta: " + idCuenta, 1, "Eliminar Cuenta");
+            if(eliminado){
+                try {
+                    Persistencia.guardarCuentas(billeteraDigital.getCuentas());
+                    Persistencia.guardarRecursoBancoXML(billeteraDigital);
+                    Persistencia.guardarRecursoBancoBinario(billeteraDigital);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+            return eliminado;
+        }
+
+        public List<Cuenta> obtenerCuentas() {
+            return billeteraDigital.getCuentas();
+        }
+
+        public List<Presupuesto> obtenerPresupuestos() {
+            return billeteraDigital.getPresupuestos();
+        }
+
+        public boolean crearPresupuesto(Presupuesto presupuesto) {
+            boolean crear = false;
+            crear =billeteraDigital.CrearPresupuesto(presupuesto);
+            Persistencia.guardaRegistroLog("Se creo el presupuesto: " + presupuesto.getIdPresupuesto(), 1, "Crear presupuesto");
+            return crear;
+        }
+
+        public boolean actualizarPresupuesto(Presupuesto presupuesto) {
+            boolean actualizar= false;
+            actualizar= billeteraDigital.actualizarPresupuesto(presupuesto);
+            return actualizar;
+        }
+
+        public boolean eliminarPresupuesto(String idPresupuesto) {
+            boolean eliminar= billeteraDigital.eliminarPresupuesto(idPresupuesto);
+            return eliminar;
         }
     }
